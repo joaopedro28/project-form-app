@@ -15,12 +15,11 @@ export default {
         window.addEventListener('resize', this.updateScreenHeight);
     },
     beforeDestroy() {
-
         window.removeEventListener('resize', this.updateScreenHeight);
     },
     methods: {
         updateScreenHeight() {
-            this.alturaDaTela = window.innerHeight;
+            this.screenHeight = window.innerHeight;
         }
     }
 };
