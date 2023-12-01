@@ -1,0 +1,45 @@
+html {
+  color: var(--font-color-base);
+  font-size: 62.5%; // 1rem = 10px
+  line-height: var(--line-height);
+
+  @include media("lg") {
+    font-size: 75%; // 1rem = 12px
+  }
+}
+
+body {
+  font-family: var(--font-family) !important;
+  background-color: var(--form-color-background);
+  overflow-x: hidden;
+}
+
+main {
+  min-height: 50vh;
+  overflow: hidden;
+  color: var(--font-color);
+}
+
+a {
+  color: currentColor;
+  text-decoration: none;
+}
+
+a,
+button,
+input {
+  // para remover as bordas arredondadas do safari mob
+  border: 0;
+  border-radius: 0;
+  padding: 0;
+  -webkit-appearance: none;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+.button-default {
+  @extend %button-default;
+}
