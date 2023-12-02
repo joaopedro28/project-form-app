@@ -30,7 +30,8 @@ export default {
 
     methods: {
         submitForm() {
-            console.log(this.inputValue, this.$parent.$el.id , this.field.id, 'filho');
+            console.log(this.inputValue, this.$parent.$el.id, 'filho checkbox');
+            this.$emit('next');
             this.$parent.receberInfo(this.inputValue, this.$parent.$el.id, this.field.id)
         },
         sendForm() {

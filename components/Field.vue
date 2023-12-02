@@ -1,6 +1,6 @@
 <template>
     <div class="field" :class="index == 0 ? '-active' : ''" v-if="field.type == 'text' || field.type == 'email'" :id="index">
-        <AnyText :field="field" :isLast="isLast" />
+        <AnyText :field="field" :isLast="isLast" @next="next" />
     </div>
     <div class="field" v-else-if="field.type === 'checkbox'" :id="index">
         <Checkbox :field="field" :isLast="isLast" />
@@ -50,6 +50,9 @@ export default {
                 nextFieldBlock.classList.add('-active')
             }
         },
+        next() {
+            this.$emit('next')
+        }
     }
 }
 </script>

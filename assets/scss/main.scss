@@ -5,7 +5,8 @@
 @import "./base/base";
 
 @import "./components/forms";
-
+@import "./components/nav_container";
+@import "./components/progress_bar";
 
 .container {
     display: grid;

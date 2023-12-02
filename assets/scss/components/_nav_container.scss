@@ -1,0 +1,24 @@
+
+.nav-container {
+    display: block;
+    grid-area: navbar;
+
+    .formNav-comp {
+        align-items: center;
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        justify-content: center;
+    }
+
+    .nav-button {
+        border-radius: 50px;
+        cursor: pointer;
+        font-size: 20px;
+        margin: 4px;
+        padding: 8px;
+    }
+    .svg-inline--fa.fa-w-14 {
+        width: 0.875em;
+    }
+}

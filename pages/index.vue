@@ -1,12 +1,16 @@
 <template>
     <div class="container">
-        <Forms class="forms" :form="form" :id="id" />
+        <ProgressBar />
+        <Forms class="forms" @next="next" :form="form" :id="id" />
+        <SideNav />
+
     </div>
 </template>
 
 <script>
 import Forms from '../components/Forms.vue';
-
+import SideNav from '../components/SideNav.vue';
+import ProgressBar from '../components/ProgressBar.vue';
 export default {
     data() {
         return {
@@ -16,6 +20,29 @@ export default {
     },
     mounted() {
     },
+    methods: {
+        next() {
+            console.log('clicou no botão avancar' )
+            const progressBars = document.querySelectorAll('.progress');
+            for (let i = 0; i < progressBars.length; i++) {
+                if (!progressBars[i].classList.contains('-active')) {
+                    progressBars[i].classList.add('-active');
+                    break;
+                }
+            }
+        },
+        prev() {
+            console.log('clicou no botão prev' )
+            const progressBars = document.querySelectorAll('.progress');
+            for (let i = progressBars.length - 1; i >= 0; i--) {
+                if (progressBars[i].classList.contains('-active')) {
+                    progressBars[i].classList.remove('-active');
+                    break;
+                }
+            }
+        }
+    },
+
     // Nesse asyncData ele esta esperando que seja selecionado um dos formularios, 
     // passando como um parametro na url o id pelo id, se não for passado nada ele pega o id 0;
     async asyncData({ query }) {
