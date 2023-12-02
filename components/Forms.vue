@@ -54,8 +54,7 @@ export default {
                     }
                 });
 
-                //aqui a gente tem que mandar para a ultima questão/ pagina de sucesso Message.vue
-                console.log('document.querySelectorAll', document.querySelectorAll('.field'))
+                //Aqui a gente tem que mandar para a ultima questão/ pagina de sucesso Message.vue
                 const fields = document.querySelectorAll('.field');
                 fields.forEach((field) => {
                     if (field.classList.contains('-active')) {

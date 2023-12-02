@@ -36,7 +36,9 @@ export default {
     components: { AnyText, Checkbox, Message },
 
     mounted() {
-        this.setInputFocus(this.index);
+        if (this.index == 0) {
+            this.setInputFocus(this.index);
+        }
     },
 
     methods: {
@@ -67,9 +69,8 @@ export default {
         setInputFocus(index, field_id) {
             if (index == 0) {
                 document.getElementById('input-' + this.field.id).focus();
-            } else{
-                console.log('field_id', field_id)
-                //document.getElementById('input-' + field_id).focus();
+            } else {
+                document.getElementById('input-' + field_id).focus();
             }
         }
     }
