@@ -27,7 +27,7 @@
         width: 0;
         transition: all 0.8s ease;
         &.-active {
-            background-color: rgba(var(--form-color-alpha, #536dfe), 1);
+            background-color: var(--form-color);
             width: var(--width);
             transition: all 0.8s ease;
         }

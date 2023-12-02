@@ -4,24 +4,25 @@
 @import "./base/mixins";
 @import "./base/base";
 
-@import "./components/forms";
-@import "./components/nav_container";
-@import "./components/progress_bar";
 
 .container {
     display: grid;
     grid-template-areas:
-        "header header"
-        "content navbar";
+    "header header"
+    "content navbar";
     grid-template-columns: auto 50px;
     grid-template-rows: 50px auto;
     height: 100%;
     transition: all 1s 1s;
     width: 100%;
-
+    
     &.message-final {
         grid-template-areas:
         "content content"
         "content content";
     }
+    
+    @import "./components/forms";
+    @import "./components/nav_container";
+    @import "./components/progress_bar";
 }

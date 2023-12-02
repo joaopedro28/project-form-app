@@ -67,6 +67,7 @@
                 vertical-align: baseline;
                 max-height: 80dvh;
                 overflow-y: auto;
+                padding-right: 10px;
 
                 &::-webkit-scrollbar {
                     width: 8px;
@@ -80,7 +81,7 @@
                     background-color: var(--form-color);
                     border-radius: 4px;
                 }
-                
+
                 label {
                     display: flex;
                     font-size: 24px;
@@ -104,11 +105,9 @@
                 input {
                     background: transparent;
                     border: 0;
-                    border-bottom: 1px solid rgba(#536dfe, 1);
-                    border-bottom: 1px solid rgba(var(--form-color-question, var(--form-color-alpha, #536dfe)), 1);
+                    border-bottom: 1px solid var(--font-color);
                     border-radius: 0;
-                    color: rgba(#536dfe, 1);
-                    color: rgba(var(--form-color-question, var(--form-color-alpha, #536dfe)), 1);
+                    color: var(--font-color);
                     font-size: 22px;
                     padding: 8px 0;
                     width: 100%;
@@ -146,12 +145,12 @@
                     .option {
                         line-height: 1;
                         border-radius: 4px;
-                        color: rgba(var(--form-color-question, var(--form-color-alpha, #536dfe)), 1);
+                        color: var(--font-color);
                         font-size: 19.6px;
                         margin-bottom: 11.2px;
                         margin-left: 1px;
                         margin-top: 2px;
-                        outline: 1px solid rgba(var(--form-color-question, var(--form-color-alpha, #536dfe)), 1);
+                        outline: 1px solid var(--font-color);
                         padding: 8px;
                         align-items: center;
                         display: flex;
@@ -162,9 +161,9 @@
                             text-transform: uppercase;
                             align-items: center;
                             display: flex;
-                            background: rgba(var(--form-color-question, var(--form-color-alpha, #536dfe)), 0.15);
-                            border-color: var(--form-color-question, var(--form-color-alpha, #536dfe));
-                            color: var(--form-color-question, var(--form-color-alpha, #536dfe));
+                            background: rgb(255, 255, 255, .15);
+                            border-color: var(--font-color);
+                            color: var(--font-color);
                             height: 20px;
                             justify-content: center;
                             margin-right: 8px;
@@ -174,11 +173,11 @@
                         }
 
                         &.selected {
-                            background: rgba(var(--form-color-question, var(--form-color-alpha, #536dfe)), 0.1);
+                            background: rgb(255, 255, 255, .1);
                             font-weight: 700;
                             .letter {
                                 color: var(--form-color-background, #fff);
-                                background: rgba(var(--form-color-question, var(--form-color-alpha, #536dfe)), 1);
+                                background: var(--font-color);
                             }
                         }
                     }
@@ -193,8 +192,8 @@
                     font-size: 16px;
                     padding: 8px 16px;
                     color: #000;
-                    background-color: rgba(var(--form-color-alpha, #536dfe), 1);
-                    border-color: rgba(var(--form-color-alpha, #536dfe), 1);
+                    background-color: var(--form-color);
+                    border-color: var(--form-color);
                     box-shadow: 0 0 6px rgba(0, 0, 0, 0.2);
                 }
             }

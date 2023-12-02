@@ -1,5 +1,8 @@
 <template>
-    <div class="container">
+    <div class="container" 
+    :style="`--font-color:  ${form_style.textColor ? form_style.textColor : 'currentColor'};
+            --form-color: ${form_style.buttonColor ? form_style.buttonColor : 'currentColor'};
+            --form-color-background: ${form_style.bgColor ? form_style.bgColor : 'currentColor'};`">
         
         <ProgressBar />
         <Forms class="forms" @next="next" :form="form" :id="id" />
@@ -17,6 +20,7 @@ export default {
         return {
             form: {},
             id: 0,
+            form_style: {}
         };
     },
     mounted() {
@@ -47,12 +51,13 @@ export default {
     async asyncData({ query  , $axios }) {
         let id = query.id || 1;
         const response = await $axios(`/forms?id=${id}`);
-        const form = response.data;
+        const form = response.data;  
         id = id !== null ? Number(id) : null;
-        console.log(form[0].fields)
+        
         return {
             id,
             form: form[0],
+            form_style: form[0].style
         };
     },
     components: { Forms }
