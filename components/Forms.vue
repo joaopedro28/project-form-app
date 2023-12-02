@@ -63,6 +63,7 @@ export default {
                         field.classList.add('-prev');
                     }
                     if (field.classList.value == 'field') {
+                        field.classList.add('-active');
                         this.$emit('next');
                     }
                 });
