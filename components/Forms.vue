@@ -40,6 +40,7 @@ export default {
             else {
                 this.dataForm.push(itemForm);
             }
+            console.log('this.dataForm', this.dataForm)
         },
         next() {
             this.$emit('next')

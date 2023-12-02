@@ -14,8 +14,10 @@
             </div>
         </div>
 
-        <button v-if="!isLast" @click="submitForm" type="button" :id="'button-' + field.id">Responder</button> 
-        <button v-if="isLast" type="button"  @click="sendForm()">Enviar respostas</button>
+        <div v-if="validationError" class="error-message">{{ validationError }}</div>
+
+        <button v-if="!isLast" @click="validateAndSubmit" type="button" :id="'button-' + field.id">Responder</button>
+        <button v-if="isLast" type="button" @click="sendForm()">Enviar respostas</button>
 
     </div>
 </template>
@@ -38,11 +40,11 @@ export default {
     data() {
         return {
             optionsSelected: [],
+            validationError: null,
         }
     },
     methods: {
         submitForm() {
-            console.log(this.inputValue, this.$parent.$el.id, 'filho checkbox');
             this.$parent.receberInfo(this.inputValue, this.$parent.$el.id)
         },
         selectOption(selectedOption, el) {
@@ -54,8 +56,32 @@ export default {
             }
             this.$parent.receberInfo(this.optionsSelected, this.$parent.$el.id, this.field.id)
         },
+
+        validateAndSubmit() {
+            this.validationError = null;  // Limpar erro antes de cada validação
+
+            if (this.field.type === 'checkbox') {
+                if (this.optionsSelected.length === 0) {
+                    this.validationError = 'Essa resposta é obrigatória';
+                    this.scheduleErrorClear();
+                    return false;
+                } else {
+                    return true
+                }
+            }
+
+            this.submitForm();
+        },
+        scheduleErrorClear() {
+            setTimeout(() => {
+                this.validationError = null;
+                this.isInvalid = false;
+            }, 6000);
+        },
         sendForm() {
-            this.$nuxt.$emit('send-form');
+            if (this.validateAndSubmit()){
+                this.$nuxt.$emit('send-form');
+            } 
         }
     },
 }
