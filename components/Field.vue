@@ -1,15 +1,19 @@
 <template>
-    <div class="field" :class="index == 0 ? '-active' : ''" v-if="field.type == 'text' || field.type == 'email'" :id="index">
-        <AnyText :field="field" :isLast="isLast" @next="next" />
+    <div class="field" :class="index == 0 ? '-active' : ''" v-if="field.type == 'text' || field.type == 'email'"
+        :id="index">
+        <AnyText :field="field" :isLast="isLast" @next="next" :index="index" />
     </div>
     <div class="field" v-else-if="field.type === 'checkbox'" :id="index">
         <Checkbox :field="field" :isLast="isLast" />
     </div>
-
+    <div class="field" v-else :id="index">
+        <Message :field="field" />
+    </div>
 </template>
 <script>
 import AnyText from './field_types/AnyText.vue';
 import Checkbox from './field_types/Checkbox.vue';
+import Message from './field_types/Message.vue';
 
 export default {
     props: {
@@ -28,30 +32,45 @@ export default {
             formItems: {}
         }
     },
-    
-    components: { AnyText, Checkbox },
-    
+
+    components: { AnyText, Checkbox, Message },
+
+    mounted() {
+        this.setInputFocus(this.index);
+    },
+
     methods: {
-        receberInfo(value, id_parent, field_id) {
+        getInfo(value, id_parent, field_id, final_question = false) {
             this.formItems = {
                 fieldId: field_id,
                 value: value
             }
             this.$parent.formContent(this.formItems)
-            this.nextQuestion(id_parent)
+            if (!final_question) {
+                this.nextQuestion(id_parent, field_id)
+            }
         },
-        nextQuestion(id) {
+        nextQuestion(id, field_id) {
             let fieldBlock = document.getElementById(id);
             let nextFieldBlock = fieldBlock.nextElementSibling;
-            if (nextFieldBlock) {   
+            if (nextFieldBlock) {
                 fieldBlock.classList.remove('-active')
                 fieldBlock.classList.add('-prev')
-                
+
                 nextFieldBlock.classList.add('-active')
+                this.setInputFocus(null, field_id)
             }
         },
         next() {
             this.$emit('next')
+        },
+        setInputFocus(index, field_id) {
+            if (index == 0) {
+                document.getElementById('input-' + this.field.id).focus();
+            } else{
+                console.log('field_id', field_id)
+                //document.getElementById('input-' + field_id).focus();
+            }
         }
     }
 }

@@ -2,19 +2,20 @@
     <nav class="nav-container">
         <div class="formNav-comp">
             <div class="nav-button button-up" @click="prevQuestion">
-                <NavButton arrow="up" />
+                <Icons icon="up" />
             </div>
             <div class="nav-button button-down" @click="nextQuestion">
-                <NavButton arrow="down" />
+                <Icons icon="down" />
             </div>
         </div>
     </nav>
 </template>
+
 <script>
-import NavButton from './NavButton.vue';
+import Icons from './Icons.vue';
 
 export default {
-    components: { NavButton },
+    components: { Icons },
 
     methods: {
         prevQuestion() {
@@ -30,6 +31,17 @@ export default {
         nextQuestion() {
             let questionActive = document.querySelector('.field.-active');
             let nextQuestion = questionActive.nextElementSibling;
+
+            let inputField = questionActive.querySelector('input');
+            if (inputField && (inputField.value === '' )) {
+                return;  
+            }
+
+            let dataSelected = questionActive.querySelector('.field-group');
+            if (dataSelected && dataSelected.dataset.selected != 'true') {
+                return;
+            }
+
             if (nextQuestion) {   
                 questionActive.classList.remove('-active');
                 questionActive.classList.add('-prev');

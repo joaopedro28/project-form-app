@@ -1,5 +1,6 @@
 <template>
     <div class="container">
+        
         <ProgressBar />
         <Forms class="forms" @next="next" :form="form" :id="id" />
         <SideNav />
@@ -15,14 +16,13 @@ export default {
     data() {
         return {
             form: {},
-            id: 0
+            id: 0,
         };
     },
     mounted() {
     },
     methods: {
         next() {
-            console.log('clicou no botão avancar' )
             const progressBars = document.querySelectorAll('.progress');
             for (let i = 0; i < progressBars.length; i++) {
                 if (!progressBars[i].classList.contains('-active')) {

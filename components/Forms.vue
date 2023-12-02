@@ -40,7 +40,6 @@ export default {
             else {
                 this.dataForm.push(itemForm);
             }
-            console.log('this.dataForm', this.dataForm)
         },
         next() {
             this.$emit('next')
@@ -55,7 +54,23 @@ export default {
                     }
                 });
 
-                console.log('Resposta da solicitação POST:', response.data);
+                //aqui a gente tem que mandar para a ultima questão/ pagina de sucesso Message.vue
+                console.log('document.querySelectorAll', document.querySelectorAll('.field'))
+                const fields = document.querySelectorAll('.field');
+                fields.forEach((field) => {
+                    if (field.classList.contains('-active')) {
+                        field.classList.remove('-active');
+                        field.classList.add('-prev');
+                    }
+                    if (field.classList.value == 'field') {
+                        this.$emit('next');
+                    }
+                });
+                
+                document.querySelector('.container').classList.add('message-final');
+                document.querySelector('.progress-bar').style.display = 'none';
+                document.querySelector('.nav-container').style.display = 'none';
+                console.log('Resposta da solicitação POST:', response);
             } catch (error) {
                 console.error('Erro ao realizar a solicitação POST:', error);
             }

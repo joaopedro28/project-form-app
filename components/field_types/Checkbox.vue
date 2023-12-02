@@ -3,12 +3,13 @@
         <label :for="field.id">{{ field.title }}</label>
         <p class="description"> {{ field.description }}</p>
 
-        <div class="field-group">
+        <div class="field-group" :data-selected="isSelected" > 
             <p class="field-tip">
+                <Icons icon="checkbox" />
                 Selecione quantos itens desejar.
             </p>
             <div class="option" v-for="(option, index) in field.options" :key="option.id"
-                @click="selectOption(option, $event.target)">
+                @click="selectOption(option, $event.target, isLast ? true : false)" :data-value="optionsSelected">
                 <span class="letter">{{ String.fromCharCode(65 + index) }}</span>
                 {{ option.value }}
             </div>
@@ -41,20 +42,26 @@ export default {
         return {
             optionsSelected: [],
             validationError: null,
+            isSelected: 'false',
         }
     },
     methods: {
         submitForm() {
-            this.$parent.receberInfo(this.inputValue, this.$parent.$el.id)
+            this.$parent.getInfo(this.inputValue, this.$parent.$el.id)
         },
-        selectOption(selectedOption, el) {
-            el.classList.toggle('selected')
+        selectOption(selectedOption, el, final_question = false) {
+            el.classList.toggle('selected');
             if (this.optionsSelected.includes(selectedOption)) {
                 this.optionsSelected.splice(this.optionsSelected.indexOf(selectedOption), 1)
+                if (this.optionsSelected.length === 0) {
+                    this.isSelected = 'false';
+                }
             } else {
                 this.optionsSelected.push(selectedOption)
+                this.isSelected = 'true';
             }
-            this.$parent.receberInfo(this.optionsSelected, this.$parent.$el.id, this.field.id)
+            
+            this.$parent.getInfo(this.optionsSelected, this.$parent.$el.id, this.field.id, final_question)
         },
 
         validateAndSubmit() {
