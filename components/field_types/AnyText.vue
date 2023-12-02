@@ -2,15 +2,20 @@
     <div class="field-box">
         <label :for="field.id">{{ field.title }}</label>
         <p class="description"> {{ field.description }}</p>
-        <input :id="'input-' + field.id" autocomplete="off" :class="isInvalid ? 'invalid' : ''" :type="field.type" value="" v-model="inputValue"
-            required :placeholder="placeholder">
+        <input :id="'input-' + field.id" autocomplete="off" :class="isInvalid ? 'invalid' : ''" :type="field.type" value=""
+            v-model="inputValue" required :placeholder="placeholder">
         <div v-if="validationError" class="error-message">{{ validationError }}</div>
         <button v-if="!isLast" @click="validateAndSubmit" type="button" :id="'button-' + field.id">Responder</button>
-        <button v-if="isLast" type="button" @click="sendForm()">Enviar respostas</button>
+        <button v-if="isLast"  type="button" @click="sendForm()">
+            <Icons icon="check" />
+            Enviar respostas
+        </button>
     </div>
 </template>
 
 <script>
+import Icons from '../Icons.vue';
+
 export default {
     props: {
         field: {
@@ -36,6 +41,10 @@ export default {
     },
 
     mounted() {
+        if (this.field.type == 'email') {
+            this.placeholder = 'exemplo@exemplo.com'
+        }
+
     },
     methods: {
         submitForm() {
@@ -49,7 +58,7 @@ export default {
             return emailRegex.test(email);
         },
         validateAndSubmit() {
-            this.validationError = null; 
+            this.validationError = null;
             if (this.field.type === 'email') {
                 if (!this.inputValue) {
                     this.validationError = 'Essa resposta é obrigatória';

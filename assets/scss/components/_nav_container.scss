@@ -20,5 +20,10 @@
     }
     .svg-inline--fa.fa-w-14 {
         width: 0.875em;
+        fill: var(--font-color);
+
+        &:hover {
+            fill: var(--form-color);
+        }
     }
 }

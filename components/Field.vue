@@ -3,7 +3,7 @@
         :id="index">
         <AnyText :field="field" :isLast="isLast" @next="next" :index="index" />
     </div>
-    <div class="field" v-else-if="field.type === 'checkbox'" :id="index">
+    <div class="field" :class="index == 0 ? '-active' : ''" v-else-if="field.type === 'checkbox'" :id="index">
         <Checkbox :field="field" :isLast="isLast" />
     </div>
     <div class="field" v-else :id="index">
@@ -67,9 +67,9 @@ export default {
             this.$emit('next')
         },
         setInputFocus(index, field_id) {
-            if (index == 0) {
+            if (index == 0 && document.getElementById('input-' + this.field.id)) {
                 document.getElementById('input-' + this.field.id).focus();
-            } else {
+            } else if (document.getElementById('input-' + field_id)) {
                 document.getElementById('input-' + field_id).focus();
             }
         }

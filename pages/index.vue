@@ -49,6 +49,7 @@ export default {
         const response = await $axios(`/forms?id=${id}`);
         const form = response.data;
         id = id !== null ? Number(id) : null;
+        console.log(form[0].fields)
         return {
             id,
             form: form[0],

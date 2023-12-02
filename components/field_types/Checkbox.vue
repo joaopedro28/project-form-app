@@ -18,8 +18,10 @@
         <div v-if="validationError" class="error-message">{{ validationError }}</div>
 
         <button v-if="!isLast" @click="validateAndSubmit" type="button" :id="'button-' + field.id">Responder</button>
-        <button v-if="isLast" type="button" @click="sendForm()">Enviar respostas</button>
-
+        <button v-if="isLast"  type="button" @click="sendForm()">
+            <Icons icon="check" />
+            Enviar respostas
+        </button>
     </div>
 </template>
 
