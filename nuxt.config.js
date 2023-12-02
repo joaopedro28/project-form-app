@@ -52,9 +52,6 @@ export default {
   build: {
     build: {
       loaders: {
-        sass: {
-          implementation: require('sass'),
-        },
         scss: {
           implementation: require('sass'),
         },
