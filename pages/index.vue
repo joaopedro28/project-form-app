@@ -32,7 +32,6 @@ export default {
             }
         },
         prev() {
-            console.log('clicou no botão prev' )
             const progressBars = document.querySelectorAll('.progress');
             for (let i = progressBars.length - 1; i >= 0; i--) {
                 if (progressBars[i].classList.contains('-active')) {
