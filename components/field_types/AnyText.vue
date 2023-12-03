@@ -65,7 +65,7 @@ export default {
             const { validationError, isInvalid } = validate(this.inputValue, this.validationError, this.field.type, this.isInvalid);
             this.validationError = validationError;
             this.isInvalid = isInvalid;
-            console.log(this.isInvalid, this.validationError) 
+            console.log(this.isInvalid, this.validationError)
             if (!this.isInvalid && callback && typeof callback === 'function') {
                 callback();
             }

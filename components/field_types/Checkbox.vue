@@ -49,8 +49,8 @@ export default {
         }
     },
     methods: {
-        submitForm() {
-            this.$parent.getInfo(this.inputValue, this.$parent.$el.id)
+        submitForm(isLast) {
+            this.$parent.getInfo(this.optionsSelected, this.$parent.$el.id, this.field.id, isLast)
         },
         selectOption(selectedOption, el, final_question = false) {
             el.classList.toggle('selected');
@@ -69,7 +69,7 @@ export default {
 
         validateAndSubmit() {
             this.performValidation(() => {
-                if (this.isSelected) {
+                if (!this.isSelected) {
                     this.submitForm();
                 }
             });
@@ -77,6 +77,7 @@ export default {
         sendForm() {
             this.performValidation(() => {
                 if (!this.isSelected) {
+                    this.submitForm(true);
                     this.$nuxt.$emit('send-form');
                 }
             });
