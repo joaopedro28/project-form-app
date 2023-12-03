@@ -22,8 +22,7 @@ export default {
             type: Object
         },
         placeholder: {
-            type: String,
-            default: 'Sua resposta...'
+            type: String
         },
         isLast: {
             type: Object
@@ -39,12 +38,8 @@ export default {
             isInvalid: false
         };
     },
-
-    mounted() {
-        if (this.field.type == 'email') {
-            this.placeholder = 'exemplo@exemplo.com'
-        }
-
+    components: {
+        Icons
     },
     methods: {
         submitForm() {

@@ -140,10 +140,15 @@ Para exemplificar a comunicação entre componentes, foram utilizados os método
 Esses métodos foram utilizados para demonstrar formas e exemplificar a funcionalidade de executar funções entre componentes.
 
 
+## Possíveis Aprimoramentos neste Teste
+- Aperfeiçoar os procedimentos de validação, incluindo validações ao clicar na seta em SideNav.vue.
+- Incorporar suporte para uma variedade mais ampla de tipos de entrada, como textarea, seleção por radio e a possibilidade de fazer upload de arquivos utilizando o tipo file, por exemplo, para perguntas específicas.
 
-## Melhorias Possíveis nesse Teste
+## Observações:
 
-- Melhorar a forma de validações, validar também ao clicar na seta em SideNav.vue
-- Considerar mais tipos de input e tambem considerar por exemplo uma pergunta podendo ser um textarea, tipo radio, tipo file para fazer uploads de arquivos
+- Foi criado uma cópia da mock disponivel para realização do teste, pois a que estava sendo utilizada estava retornando erro na hora do POST:
+
+###### https://656bf814e1e03bfd572dee70.mockapi.io/api/forms
 
 ---
+
