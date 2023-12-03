@@ -76,7 +76,7 @@
                 &::-webkit-scrollbar-track {
                     background-color: var(--black);
                 }
-                
+
                 &::-webkit-scrollbar-thumb {
                     background-color: var(--form-color);
                     border-radius: 4px;
@@ -161,7 +161,7 @@
                             text-transform: uppercase;
                             align-items: center;
                             display: flex;
-                            background: rgb(255, 255, 255, .15);
+                            background: rgb(255, 255, 255, 0.15);
                             border-color: var(--font-color);
                             color: var(--font-color);
                             height: 20px;
@@ -173,7 +173,7 @@
                         }
 
                         &.selected {
-                            background: rgb(255, 255, 255, .1);
+                            background: rgb(255, 255, 255, 0.1);
                             font-weight: 700;
                             .letter {
                                 color: var(--form-color-background, #fff);
@@ -205,6 +205,7 @@
         justify-content: center;
         align-items: center;
         flex-direction: column;
+        height: 100%;
 
         svg {
             margin: 0 auto 50px;
@@ -218,6 +219,33 @@
             font-size: 16px;
             text-align: center;
             margin-top: 8px;
+        }
+
+        .container-button {
+            position: absolute;
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+            justify-content: center;
+            bottom: 2%;
+            text-align: center;
+            width: 100%;
+
+            .button {
+                max-width: 250px;
+                border-radius: 5px;
+                display: flex;
+                gap: 5px;
+                flex-direction: row;
+                align-items: center;
+                font-size: 16px;
+                padding: 8px 16px;
+                color: #000;
+                background-color: var(--form-color);
+                border-color: var(--form-color);
+                box-shadow: 0 0 6px rgba(0, 0, 0, 0.2);
+                margin: auto;
+            }
         }
     }
 }

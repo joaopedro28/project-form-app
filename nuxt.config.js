@@ -39,6 +39,10 @@ export default {
     {
       path: '/index/:id?',
       component: '~/pages/index.vue'
+    },
+    {
+      path: '/forms',
+      component: '~/pages/forms.vue'
     }
   ],
 

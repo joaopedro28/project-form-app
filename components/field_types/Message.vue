@@ -5,6 +5,19 @@
             {{ field.title }}
         </h2>
         <p>{{ field.description }}</p>
+
+        
+        <div class="container-button">
+            <h1>Hey</h1>
+            <p>
+                Venha conferir outros formulários disponiveis!
+            </p>
+
+            <div class="buttons">
+                <nuxt-link class="button" to="/forms">TODOS OS FORMULÁRIOS</nuxt-link>
+            </div>
+        </div>
+
     </div>
 </template>
 
@@ -18,5 +31,6 @@ export default {
         }
     },
     components: { Icons }
+    
 }
 </script>

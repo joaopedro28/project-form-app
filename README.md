@@ -112,19 +112,27 @@ O componente `Forms.vue` é central na aplicação, gerenciando o formulário pr
 
 Esses são alguns dos principais componentes utilizados no projeto. Para obter detalhes específicos sobre a implementação de cada componente, consulte os respectivos arquivos no diretório `components/`.
 
-## Decisões no Desenvolvimento do Projeto
+## Decisões e Funcionalidades do Desenvolvimento do Projeto
 
 Durante o desenvolvimento deste projeto, diversas decisões foram tomadas para atender aos requisitos e proporcionar uma experiência eficiente e escalável. Abaixo estão algumas das decisões mais importantes:
 
-### Aplicação Padrão do Formulário
+### Definição de parâmetro ID na URL 
 
-A decisão foi tomada de aplicar o formulário com o ID = 1 como padrão na inicialização da aplicação. No entanto, foi implementada a flexibilidade de passar um ID como parâmetro, permitindo a navegação para outros formulários disponíveis na API.
+Foi tomada a decisão de aplicar o formulário com o ID = 1 como padrão na inicialização da aplicação. No entanto, foi implementada a flexibilidade de passar um ID como parâmetro, permitindo a navegação para outros formulários disponíveis na API.
 
-Basta passar o parametro id para url, como no exemplo:
+Basta passar o parâmetro id para url, como no exemplo:
 
 ```
 http://localhost:3000/?id=2
 ```
+
+Para fins de exemplificação foi criada a página **forms.vue**, para poder chegar nos outros formulários através da interface da aplicação. Você consegue chegar nessa tela sempre que termina de preencher um formulário por completo ou indo direto pelo link abaixo.
+
+
+```
+http://localhost:3000/forms
+```
+
 
 ### Cores Dinâmicas
 
