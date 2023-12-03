@@ -5,8 +5,8 @@
         <input :id="'input-' + field.id" autocomplete="off" :class="isInvalid ? 'invalid' : ''" :type="field.type" value=""
             v-model="inputValue" required :placeholder="placeholder">
         <div v-if="validationError" class="error-message">{{ validationError }}</div>
-        <button v-if="!isLast" @click="validateAndSubmit" type="button" :id="'button-' + field.id">Responder</button>
-        <button v-if="isLast"  type="button" @click="sendForm()">
+        <button v-if="!isLast" @click="validateAndSubmit()" type="button" :id="'button-' + field.id">Responder</button>
+        <button v-if="isLast" type="button" @click="sendForm()">
             <Icons icon="check" />
             Enviar respostas
         </button>
@@ -15,6 +15,7 @@
 
 <script>
 import Icons from '../Icons.vue';
+import { validate } from '../../utils/utlis.js';
 
 export default {
     props: {
@@ -42,53 +43,33 @@ export default {
         Icons
     },
     methods: {
+        validateAndSubmit() {
+            this.performValidation(() => {
+                if (!this.isInvalid) {
+                    this.submitForm();
+                }
+            });
+        },
         submitForm() {
             this.$emit('next');
             this.$parent.getInfo(this.inputValue, this.$parent.$el.id, this.field.id)
         },
-
-        isValidEmail(email) {
-            // Utilizando uma expressão regular (regex) para validar o formato do e-mail
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            return emailRegex.test(email);
-        },
-        validateAndSubmit() {
-            this.validationError = null;
-            if (this.field.type === 'email') {
-                if (!this.inputValue) {
-                    this.validationError = 'Essa resposta é obrigatória';
-                    this.scheduleErrorClear();
-                    this.isInvalid = true;
-                    return;
-                }
-                if (!this.isValidEmail(this.inputValue)) {
-                    this.validationError = 'Informe um E-mail válido';
-                    this.scheduleErrorClear();
-                    this.isInvalid = true;
-                    return;
-                }
-            }
-            else if (this.field.type === 'text') {
-                if (!this.inputValue) {
-                    this.validationError = 'Essa resposta é obrigatória';
-                    this.scheduleErrorClear();
-                    this.isInvalid = true;
-                    return;
-                }
-            }
-
-            this.submitForm();
-        },
-        scheduleErrorClear() {
-            setTimeout(() => {
-                this.validationError = null;
-                this.isInvalid = false;
-            }, 6000);
-        },
         sendForm() {
-            this.validateAndSubmit();
-            this.$nuxt.$emit('send-form');
-        }
+            this.performValidation(() => {
+                if (!this.isInvalid) {
+                    this.$nuxt.$emit('send-form');
+                }
+            });
+        },
+        performValidation(callback) {
+            const { validationError, isInvalid } = validate(this.inputValue, this.validationError, this.field.type, this.isInvalid);
+            this.validationError = validationError;
+            this.isInvalid = isInvalid;
+            console.log(this.isInvalid, this.validationError) 
+            if (!this.isInvalid && callback && typeof callback === 'function') {
+                callback();
+            }
+        },
     },
 }
 </script>

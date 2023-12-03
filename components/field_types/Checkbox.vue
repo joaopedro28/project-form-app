@@ -3,7 +3,7 @@
         <label :for="field.id">{{ field.title }}</label>
         <p class="description"> {{ field.description }}</p>
 
-        <div class="field-group" :data-selected="isSelected" > 
+        <div class="field-group" :data-selected="isSelected">
             <p class="field-tip">
                 <Icons icon="checkbox" />
                 Selecione quantos itens desejar.
@@ -18,7 +18,7 @@
         <div v-if="validationError" class="error-message">{{ validationError }}</div>
 
         <button v-if="!isLast" @click="validateAndSubmit" type="button" :id="'button-' + field.id">Responder</button>
-        <button v-if="isLast"  type="button" @click="sendForm()">
+        <button v-if="isLast" type="button" @click="sendForm()">
             <Icons icon="check" />
             Enviar respostas
         </button>
@@ -26,6 +26,7 @@
 </template>
 
 <script>
+import { validate } from '../../utils/utlis.js';
 
 export default {
     props: {
@@ -62,36 +63,33 @@ export default {
                 this.optionsSelected.push(selectedOption)
                 this.isSelected = 'true';
             }
-            
+
             this.$parent.getInfo(this.optionsSelected, this.$parent.$el.id, this.field.id, final_question)
         },
 
         validateAndSubmit() {
-            this.validationError = null;  // Limpar erro antes de cada validação
-
-            if (this.field.type === 'checkbox') {
-                if (this.optionsSelected.length === 0) {
-                    this.validationError = 'Essa resposta é obrigatória';
-                    this.scheduleErrorClear();
-                    return false;
-                } else {
-                    return true
+            this.performValidation(() => {
+                if (this.isSelected) {
+                    this.submitForm();
                 }
-            }
-
-            this.submitForm();
-        },
-        scheduleErrorClear() {
-            setTimeout(() => {
-                this.validationError = null;
-                this.isInvalid = false;
-            }, 6000);
+            });
         },
         sendForm() {
-            if (this.validateAndSubmit()){
-                this.$nuxt.$emit('send-form');
-            } 
-        }
+            this.performValidation(() => {
+                if (!this.isSelected) {
+                    this.$nuxt.$emit('send-form');
+                }
+            });
+        },
+        performValidation(callback) {
+            const { validationError, isInvalid } = validate(this.optionsSelected, this.validationError, this.field.type, this.isSelected);
+            this.validationError = validationError;
+            this.isSelected = isInvalid;
+
+            if (!this.isSelected && callback && typeof callback === 'function') {
+                callback();
+            }
+        },
     },
 }
 </script>
