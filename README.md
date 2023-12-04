@@ -42,6 +42,14 @@ $ cd project-form-app
 $ npm install
 ``` 
 
+## Variáveis de ambiente
+
+Para que as requisições funcionem corretamente é necessário criar um arquivo `.env` e definir a **BASE_URL** corretamente. Assim como no exemplo abaixo:
+
+```bash
+BASE_URL=https://656bf814e1e03bfd572dee70.mockapi.io/api
+```
+
 ## Executando a Aplicação
 ### Modo de Desenvolvimento:
 
@@ -165,9 +173,9 @@ Para saber mais sobre a lógica por trás dessa atualização dinâmica, consult
 
 
 ## Possíveis Aprimoramentos neste Teste
-- Aperfeiçoar os procedimentos de validação, incluindo validações ao clicar na seta em SideNav.vue.
 - Incorporar suporte para uma variedade mais ampla de tipos de entrada, como textarea, seleção por radio e a possibilidade de fazer upload de arquivos utilizando o tipo file, por exemplo, para perguntas específicas.
 - Analisar e melhorar a escrita do scss. Como por exemplo criar classes para elementos mais gerais como botões titulos e paragrafos.
+- Aperfeiçoar os procedimentos de validação
 
 ## Observações:
 
