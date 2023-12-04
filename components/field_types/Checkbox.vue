@@ -3,7 +3,7 @@
         <label :for="field.id">{{ field.title }}</label>
         <p class="description"> {{ field.description }}</p>
 
-        <div class="field-group" :data-selected="isSelected">
+        <div :id="'checkbox-' + field.id" class="field-group" :data-selected="isSelected">
             <p class="field-tip">
                 <Icons icon="checkbox" />
                 Selecione quantos itens desejar.
@@ -15,7 +15,9 @@
             </div>
         </div>
 
-        <div v-if="validationError" class="error-message">{{ validationError }}</div>
+        <div :class="'error-message ' + (isInvalid ? 'active' : '')">
+            <span>{{ validationError }}</span>
+        </div>
 
         <button v-if="!isLast" @click="validateAndSubmit" type="button" :id="'button-' + field.id">Responder</button>
         <button v-if="isLast" type="button" @click="sendForm()">
@@ -46,6 +48,7 @@ export default {
         return {
             optionsSelected: [],
             validationError: null,
+            isInvalid: false,
             isSelected: 'false',
         }
     },
@@ -60,10 +63,12 @@ export default {
                 this.optionsSelected.splice(this.optionsSelected.indexOf(selectedOption), 1)
                 if (this.optionsSelected.length === 0) {
                     this.isSelected = 'false';
+                    this.isInvalid = false;
                 }
             } else {
                 this.optionsSelected.push(selectedOption)
                 this.isSelected = 'true';
+                this.isInvalid = true;
             }
 
             this.$parent.getInfo(this.optionsSelected, this.$parent.$el.id, this.field.id, final_question)
@@ -71,25 +76,25 @@ export default {
 
         validateAndSubmit() {
             this.performValidation(() => {
-                if (!this.isSelected) {
+                if (!this.isInvalid) {
                     this.submitForm();
                 }
             });
         },
         sendForm() {
             this.performValidation(() => {
-                if (!this.isSelected) {
+                if (!this.isInvalid) {
                     this.submitForm(true);
-                    this.$nuxt.$emit('send-form');
+                    // this.$nuxt.$emit('send-form');
                 }
             });
         },
         performValidation(callback) {
-            const { validationError, isInvalid } = validate(this.optionsSelected, this.validationError, this.field.type, this.isSelected);
+            const { validationError, isInvalid } = validate(this.optionsSelected, this.validationError, this.field.type, this.isInvalid, 'checkbox-' + this.field.id);
             this.validationError = validationError;
-            this.isSelected = isInvalid;
+            this.isInvalid = isInvalid;
 
-            if (!this.isSelected && callback && typeof callback === 'function') {
+            if (!this.isInvalid && callback && typeof callback === 'function') {
                 callback();
             }
         },

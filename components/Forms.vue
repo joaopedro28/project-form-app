@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="fields" v-if="id != null">
-            <Field v-for="(field, index) in form.fields" :key="field.id" :field="field" :index="index" @next="next"
+            <Field v-for="(field, index) in form.fields" :key="field.id" :field="field" :index="index" 
                 :isLast="index === form.fields.length - 2 ? { isLast: true, sendButton: form.fields[form.fields.length - 1] } : null" />
         </div>
     </div>

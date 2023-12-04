@@ -125,15 +125,22 @@
                 }
 
                 .error-message {
-                    background: #ff1744;
-                    border-radius: 0 0 5px 5px;
-                    color: #fff;
-                    width: fit-content;
-                    font-size: 12px;
-                    margin-top: 1px;
-                    padding: 4px 8px;
-                    margin-bottom: 16px;
-                    transition: all 0.5s;
+                    display: none;
+
+                    &.active {
+                        display: flex;
+                    }
+                    span {
+                        background: #ff1744;
+                        border-radius: 0 0 5px 5px;
+                        color: #fff;
+                        width: fit-content;
+                        font-size: 12px;
+                        margin-top: 1px;
+                        padding: 4px 8px;
+                        margin-bottom: 16px;
+                        transition: all 0.5s;
+                    }
                 }
 
                 .field-group {
