@@ -27,6 +27,7 @@
 
 <script>
 import { validate } from '../../utils/utlis.js';
+import { nextProgressBar } from '../../utils/navigation_controller.js';
 
 export default {
     props: {
@@ -50,6 +51,7 @@ export default {
     },
     methods: {
         submitForm(isLast) {
+            nextProgressBar()
             this.$parent.getInfo(this.optionsSelected, this.$parent.$el.id, this.field.id, isLast)
         },
         selectOption(selectedOption, el, final_question = false) {

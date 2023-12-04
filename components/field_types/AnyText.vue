@@ -16,6 +16,7 @@
 <script>
 import Icons from '../Icons.vue';
 import { validate } from '../../utils/utlis.js';
+import { nextProgressBar } from '../../utils/navigation_controller.js';
 
 export default {
     props: {
@@ -50,13 +51,14 @@ export default {
                 }
             });
         },
-        submitForm() {
-            this.$emit('next');
+        submitForm(isLast) {
+            nextProgressBar()
             this.$parent.getInfo(this.inputValue, this.$parent.$el.id, this.field.id)
         },
         sendForm() {
             this.performValidation(() => {
                 if (!this.isInvalid) {
+                    this.submitForm(true);
                     this.$nuxt.$emit('send-form');
                 }
             });
@@ -65,7 +67,7 @@ export default {
             const { validationError, isInvalid } = validate(this.inputValue, this.validationError, this.field.type, this.isInvalid);
             this.validationError = validationError;
             this.isInvalid = isInvalid;
-            console.log(this.isInvalid, this.validationError)
+
             if (!this.isInvalid && callback && typeof callback === 'function') {
                 callback();
             }

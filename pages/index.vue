@@ -5,7 +5,7 @@
             --form-color-background: ${form_style.bgColor ? form_style.bgColor : 'currentColor'};`">
         
         <ProgressBar />
-        <Forms class="forms" @next="next" :form="form" :id="id" />
+        <Forms class="forms"  :form="form" :id="id" />
         <SideNav />
 
     </div>
@@ -15,6 +15,7 @@
 import Forms from '../components/Forms.vue';
 import SideNav from '../components/SideNav.vue';
 import ProgressBar from '../components/ProgressBar.vue';
+
 export default {
     data() {
         return {
@@ -22,28 +23,6 @@ export default {
             id: 0,
             form_style: {}
         };
-    },
-    mounted() {
-    },
-    methods: {
-        next() {
-            const progressBars = document.querySelectorAll('.progress');
-            for (let i = 0; i < progressBars.length; i++) {
-                if (!progressBars[i].classList.contains('-active')) {
-                    progressBars[i].classList.add('-active');
-                    break;
-                }
-            }
-        },
-        prev() {
-            const progressBars = document.querySelectorAll('.progress');
-            for (let i = progressBars.length - 1; i >= 0; i--) {
-                if (progressBars[i].classList.contains('-active')) {
-                    progressBars[i].classList.remove('-active');
-                    break;
-                }
-            }
-        }
     },
 
     // Nesse asyncData ele esta esperando que seja selecionado um dos formularios, 

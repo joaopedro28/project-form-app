@@ -13,6 +13,7 @@
 
 <script>
 import Icons from './Icons.vue';
+import { nextProgressBar, prevProgressBar } from '../utils/navigation_controller'
 
 export default {
     components: { Icons },
@@ -25,7 +26,7 @@ export default {
                 questionActive.classList.remove('-active');
                 prevQuestion.classList.remove('-prev');
                 prevQuestion.classList.add('-active');
-                this.$parent.prev()
+                prevProgressBar()
             }
         },
         nextQuestion() {
@@ -46,7 +47,7 @@ export default {
                 questionActive.classList.remove('-active');
                 questionActive.classList.add('-prev');
                 nextQuestion.classList.add('-active');
-                this.$parent.next()
+                nextProgressBar()
             }
         }
     },

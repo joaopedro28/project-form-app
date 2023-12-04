@@ -41,9 +41,6 @@ export default {
                 this.dataForm.push(itemForm);
             }
         },
-        next() {
-            this.$emit('next')
-        },
         async sendForm(formItems) {
             const jsonData = this.dataForm;
 
@@ -63,7 +60,6 @@ export default {
                     }
                     if (field.classList.value == 'field') {
                         field.classList.add('-active');
-                        this.$emit('next');
                     }
                 });
                 

@@ -1,7 +1,7 @@
 <template>
     <div class="field" :class="index == 0 ? '-active' : ''" v-if="field.type == 'text' || field.type == 'email'"
         :id="index">
-        <AnyText :field="field" :isLast="isLast" @next="next" :index="index" :placeholder="field.type == 'email' ? 'exemplo@exemplo.com...': 'Sua resposta...'" />
+        <AnyText :field="field" :isLast="isLast" :index="index" :placeholder="field.type == 'email' ? 'exemplo@exemplo.com...': 'Sua resposta...'" />
     </div>
     <div class="field" :class="index == 0 ? '-active' : ''" v-else-if="field.type === 'checkbox'" :id="index">
         <Checkbox :field="field" :isLast="isLast" />
@@ -62,9 +62,6 @@ export default {
                 nextFieldBlock.classList.add('-active')
                 this.setInputFocus(null, field_id)
             }
-        },
-        next() {
-            this.$emit('next')
         },
         setInputFocus(index, field_id) {
             if (index == 0 && document.getElementById('input-' + this.field.id)) {
