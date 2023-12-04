@@ -64,9 +64,7 @@ Ao utilizar o Nuxt.js 2 para o desenvolvimento deste projeto, a estrutura do dir
 
 - **`pages/`**: O diretório principal para suas páginas Vue.js. Cada arquivo .vue neste diretório corresponde a uma rota na aplicação.
 
-- **`plugins/`**: Contém plugins Vue.js que você deseja injetar na aplicação.
-
-- **`static/`**: Contém arquivos estáticos que não precisam ser processados pelo webpack, como imagens, arquivos JSON, etc.
+- **`utils/`**: Armazena utilitários e funções auxiliares que são compartilhados em diferentes partes da aplicação. O diretório `utils/` contém o arquivo `navigation_controller.js`, onde as funções relacionadas à navegação entre perguntas são implementadas e o `validate.js` onde são feitas as funções de validação dos campos a serem enviados.
 
 - **`nuxt.config.js`**: O arquivo de configuração principal do Nuxt.js. Ele pode ser usado para configurar várias opções, como módulos, cabeçalhos, entre outros.
 
@@ -142,15 +140,34 @@ Para garantir uma experiência visual coesa e dinâmica, as cores dos elementos 
 
 Acabei decidindo realizar um único POST no envio do formulário totalmente preenchido. Embora a possibilidade de fazer POST a cada etapa tenha sido considerada, juntamente com PUT para atualizações parciais, a opção escolhida visa reduzir o número de requisições desnecessárias (pelo menos desnecessárias no contexto do teste).
 
-### Uso de `$emit`, `$parent`, e `$root`
+### Uso de `$emit`, `$parent`, e `$nuxt.$emit`
 
 Para exemplificar a comunicação entre componentes, foram utilizados os métodos `$emit`, `$parent`, e `$nuxt.$emit`.
 Esses métodos foram utilizados para demonstrar formas e exemplificar a funcionalidade de executar funções entre componentes.
+
+### Setas Laterais de Navegação
+
+Este projeto utiliza setas laterais de navegação para permitir a progressão e regressão entre as perguntas. As setas são exibidas na lateral da página, e sua visibilidade é dinamicamente ajustada com base na posição atual nas perguntas.
+
+#### Funcionalidades Principais
+
+1. **Seta "Up" (↑):**
+   - A seta "Up" permite retornar à pergunta anterior, caso exista. Quando você está na primeira pergunta, a seta "Up" é ocultada para indicar que não há perguntas anteriores.
+
+2. **Seta "Down" (↓):**
+   - A seta "Down" permite avançar para a próxima pergunta, desde que todas as condições necessárias sejam atendidas. Quando você está na última pergunta (mas na penúltima posição da lista de fields), a seta "Down" é ocultada para indicar que não há mais perguntas a seguir.
+
+#### Atualização Dinâmica
+
+A visibilidade das setas é atualizada dinamicamente com a função `updateArrowVisibility`. Esta função é chamada em momentos-chave, garantindo que as setas estejam sempre em conformidade com a posição atual nas perguntas.
+
+Para saber mais sobre a lógica por trás dessa atualização dinâmica, consulte o código-fonte em [utils/navigation_controller.js](https://github.com/joaopedro28/project-form-app/blob/master/utils/navigation_controller.js).
 
 
 ## Possíveis Aprimoramentos neste Teste
 - Aperfeiçoar os procedimentos de validação, incluindo validações ao clicar na seta em SideNav.vue.
 - Incorporar suporte para uma variedade mais ampla de tipos de entrada, como textarea, seleção por radio e a possibilidade de fazer upload de arquivos utilizando o tipo file, por exemplo, para perguntas específicas.
+- Analisar e melhorar a escrita do scss. Como por exemplo criar classes para elementos mais gerais como botões titulos e paragrafos.
 
 ## Observações:
 

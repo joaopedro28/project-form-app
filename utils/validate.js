@@ -45,3 +45,4 @@ export const scheduleErrorClear = (id) => {
         input?.classList.remove('invalid');
     }, 6000);
 }
+

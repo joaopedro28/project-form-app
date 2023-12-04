@@ -28,8 +28,8 @@
 </template>
 
 <script>
-import { validate } from '../../utils/utlis.js';
-import { nextProgressBar } from '../../utils/navigation_controller.js';
+import { validate } from '../../utils/validate';
+import { nextProgressBar, updateArrowVisibility } from '../../utils/navigation_controller.js';
 
 export default {
     props: {
@@ -54,7 +54,8 @@ export default {
     },
     methods: {
         submitForm(isLast) {
-            nextProgressBar()
+            nextProgressBar();
+            updateArrowVisibility();
             this.$parent.getInfo(this.optionsSelected, this.$parent.$el.id, this.field.id, isLast)
         },
         selectOption(selectedOption, el, final_question = false) {
@@ -63,12 +64,10 @@ export default {
                 this.optionsSelected.splice(this.optionsSelected.indexOf(selectedOption), 1)
                 if (this.optionsSelected.length === 0) {
                     this.isSelected = 'false';
-                    this.isInvalid = false;
                 }
             } else {
                 this.optionsSelected.push(selectedOption)
                 this.isSelected = 'true';
-                this.isInvalid = true;
             }
 
             this.$parent.getInfo(this.optionsSelected, this.$parent.$el.id, this.field.id, final_question)
@@ -85,7 +84,7 @@ export default {
             this.performValidation(() => {
                 if (!this.isInvalid) {
                     this.submitForm(true);
-                    // this.$nuxt.$emit('send-form');
+                    this.$nuxt.$emit('send-form');
                 }
             });
         },

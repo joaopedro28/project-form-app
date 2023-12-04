@@ -17,8 +17,8 @@
 
 <script>
 import Icons from '../Icons.vue';
-import { validate } from '../../utils/utlis.js';
-import { nextProgressBar } from '../../utils/navigation_controller.js';
+import { validate } from '../../utils/validate';
+import { nextProgressBar, updateArrowVisibility } from '../../utils/navigation_controller.js';
 
 export default {
     props: {
@@ -54,8 +54,9 @@ export default {
             });
         },
         submitForm(isLast) {
-            nextProgressBar()
+            nextProgressBar();
             this.$parent.getInfo(this.inputValue, this.$parent.$el.id, this.field.id)
+            updateArrowVisibility();
         },
         sendForm() {
             this.performValidation(() => {

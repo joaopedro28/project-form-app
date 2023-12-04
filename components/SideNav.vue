@@ -14,28 +14,41 @@
 <script>
 import Icons from './Icons.vue';
 import { nextProgressBar, prevProgressBar } from '../utils/navigation_controller'
+import { isValidEmail } from '../utils/validate';
+import { updateArrowVisibility } from '../utils/navigation_controller'
 
 export default {
     components: { Icons },
 
+    mounted() {
+        updateArrowVisibility();
+    },
     methods: {
         prevQuestion() {
             let questionActive = document.querySelector('.field.-active');
             let prevQuestion = questionActive.previousElementSibling;
-            if (prevQuestion) {    
+            if (prevQuestion) {
                 questionActive.classList.remove('-active');
                 prevQuestion.classList.remove('-prev');
                 prevQuestion.classList.add('-active');
                 prevProgressBar()
+                updateArrowVisibility();
             }
         },
         nextQuestion() {
             let questionActive = document.querySelector('.field.-active');
             let nextQuestion = questionActive.nextElementSibling;
 
+            questionActive.querySelector('button')?.click();
             let inputField = questionActive.querySelector('input');
-            if (inputField && (inputField.value === '' )) {
-                return;  
+
+            if (inputField) {
+                if (inputField.value === '') {
+                    return;
+                }
+                if (inputField.type == 'email' && (!isValidEmail(inputField.value))) {
+                    return;
+                }
             }
 
             let dataSelected = questionActive.querySelector('.field-group');
@@ -43,13 +56,13 @@ export default {
                 return;
             }
 
-            if (nextQuestion) {   
+            if (nextQuestion) {
                 questionActive.classList.remove('-active');
                 questionActive.classList.add('-prev');
                 nextQuestion.classList.add('-active');
-                nextProgressBar()
+                updateArrowVisibility();
             }
-        }
+        },
     },
 }
 </script>

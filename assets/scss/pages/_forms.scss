@@ -6,10 +6,12 @@
     align-items: center;
     margin: auto;
     height: 100%;
+    padding: 5%;
 
     h1 {
         margin: 0 auto 10%;
         font-size: 38px;
+        text-align: center;
     }
 
     p {
@@ -17,10 +19,15 @@
     }
     .buttons {
         display: flex;
-        flex-direction: row;
+        flex-direction: column;
         gap: 30px;
+        justify-content: center;
         flex-wrap: wrap;
 
+        @include media('sm') {
+            flex-direction: row;
+        }
+        
         .nuxt-link {
             border-radius: 5px;
             display: flex;
